@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
 import axios from "axios";
+import { Button, TextField } from "@material-ui/core";
 
 const App = () => {
   const [data, setData] = useState({
@@ -36,25 +37,28 @@ const App = () => {
     <div className="App">
       <h1> Titanic Prediction </h1>
       <form>
-        <input
-          placeholder="Pclass"
+        <TextField
+          label="Pclass*"
           onChange={(e) => {
             handleChange("Pclass", e.target.value);
           }}
         />
-        <input
-          placeholder="Sex"
+
+        <TextField
+          label="Sex*"
           onChange={(e) => {
             handleChange("Sex", e.target.value);
           }}
         />
-        <input
-          placeholder="Age"
+        <TextField
+          label="Age*"
           onChange={(e) => {
             handleChange("Age", e.target.value);
           }}
         />
-        <input type="submit" value="Valider" onClick={handleSubmit} />
+        <Button onClick={handleSubmit} variant="contained" color="primary">
+          Valider
+        </Button>
       </form>
       <h1 hidden={apiAnswer === ""}>
         Resultat: {apiAnswer === 0 ? "Decés" : "Survie"}
