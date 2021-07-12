@@ -16,7 +16,21 @@ jobs:
           paths:
             - node_modules
           key: dependencies-{{ checksum "package.json" }}-{{ .Environment.CACHE_VERSION }}
+  test&build:
+    docker:
+      - image: circleci/node:14-buster
+    working_directory: ~/project
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dependencies-{{ checksum "package.json" }}-{{ .Environment.CACHE_VERSION }}
+            - dependencies-
+    run: yarn test --watchAll && yarn build
 workflows:
   build_test_deploy:
     jobs:
       - install
+      - test&build:
+          requires:
+            - install

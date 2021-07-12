@@ -9,8 +9,6 @@ const App = () => {
     Sex: [],
     Age: [],
   });
-
-  // eslint-disable-next-line no-unused-vars
   const [apiAnswer, setApiAnswer] = useState("");
 
   const handleSubmit = async (event) => {
