@@ -11,7 +11,10 @@ jobs:
             keys:
               - dependencies-{{ checksum "package.json" }}-{{ .Environment.CACHE_VERSION }}
               - dependencies-
-      - run: yarn install
+      - run:
+          name : Intsall deps
+          command: |
+            yarn install
       - save_cache:
           paths:
             - node_modules
@@ -27,7 +30,10 @@ jobs:
           keys:
             - dependencies-{{ checksum "package.json" }}-{{ .Environment.CACHE_VERSION }}
             - dependencies-
-      - run: yarn test && yarn build
+      - run:
+          name: Test and build
+          command: |
+              yarn test && yarn build
 
 workflows:
   build_test_deploy:
