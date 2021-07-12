@@ -4,18 +4,21 @@ import axios from "axios";
 
 const App = () => {
   const [data, setData] = useState({
-    Pclass: "",
-    Sex: "",
-    Age: "",
+    Pclass: [],
+    Sex: [],
+    Age: [],
   });
 
-  const handleSubmit = (event) => {
+  // eslint-disable-next-line no-unused-vars
+  const [apiAnswer, setApiAnswer] = useState("");
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(data);
-    axios
-      .post("http://localhost/predict", data)
+    await axios
+      .post("https://my-flask-ml.herokuapp.com/predict", data)
       .then((response) => {
         console.log(response);
+        setApiAnswer(response.data[0]);
       })
       .catch((error) => {
         console.log(error);
@@ -25,12 +28,13 @@ const App = () => {
   const handleChange = (key, value) => {
     setData((obj) => ({
       ...obj,
-      [key]: value,
+      [key]: [value],
     }));
   };
 
   return (
     <div className="App">
+      <h1> Titanic Prediction </h1>
       <form>
         <input
           placeholder="Pclass"
@@ -52,6 +56,9 @@ const App = () => {
         />
         <input type="submit" value="Valider" onClick={handleSubmit} />
       </form>
+      <h1 hidden={apiAnswer === ""}>
+        Resultat: {apiAnswer === 0 ? "Decés" : "Survie"}
+      </h1>
     </div>
   );
 };
