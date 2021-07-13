@@ -35,7 +35,7 @@ jobs:
           command: |
               yarn test && yarn build
       - persist_to_workspace:
-          root: ./
+          root: /home/circleci/project
           paths:
             - public
   deploy:
@@ -51,9 +51,11 @@ jobs:
             - dependencies-{{ checksum "package.json" }}-{{ .Environment.CACHE_VERSION }}
             - dependencies-
       - run:
+          name: install netlify cli
+          command: yarn add netlify-cli
+      -run:
           name: Deploy react app
-          command: |
-            yarn add netlify-cli  && yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=./public -p
+          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=/home/circleci/project/public -p
 workflows:
   build_test_deploy:
     jobs:
