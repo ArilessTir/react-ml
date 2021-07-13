@@ -54,7 +54,7 @@ const App = () => {
             handleChange("Age", e.target.value);
           }}
         />
-        <Button onClick={handleSubmit} variant="contained" color="primary">
+        <Button onClick={handleSubmit} color="primary">
           Valider
         </Button>
       </form>
