@@ -66,3 +66,6 @@ workflows:
       - deploy:
           requires:
             - test_build
+          filters:
+            branches:
+              only: main
