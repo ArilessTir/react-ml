@@ -34,6 +34,10 @@ jobs:
           name: Test and build
           command: |
               yarn test && yarn build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - public
   deploy:
     docker:
       - image: circleci/node:14-buster
@@ -47,7 +51,7 @@ jobs:
       - run:
           name: Deploy react app
           command: |
-            yarn add netlify-cli  && yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
+            yarn add netlify-cli  && yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=./public -p
 workflows:
   build_test_deploy:
     jobs:
