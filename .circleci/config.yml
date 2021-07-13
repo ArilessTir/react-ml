@@ -34,7 +34,20 @@ jobs:
           name: Test and build
           command: |
               yarn test && yarn build
-
+  deploy:
+    docker:
+      - image: circleci/node:14-buster
+    working_directory: ~/project
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dependencies-{{ checksum "package.json" }}-{{ .Environment.CACHE_VERSION }}
+            - dependencies-
+      - run:
+          name: Deploy react app
+          command: |
+            yarn add netlify-cli  && yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN
 workflows:
   build_test_deploy:
     jobs:
@@ -42,3 +55,6 @@ workflows:
       - test_build:
           requires:
             - install
+      - deploy:
+          requires:
+            - test_build
