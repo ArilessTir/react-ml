@@ -52,7 +52,7 @@ jobs:
             - dependencies-
       - run:
           name: install netlify cli
-          command: yarn add netlify-cli
+          command: yarn add netlify-cli -g
       - run:
           name: Deploy react app
           command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=/home/circleci/project/public -p
