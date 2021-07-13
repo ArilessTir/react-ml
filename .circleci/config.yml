@@ -47,7 +47,7 @@ jobs:
       - run:
           name: Deploy react app
           command: |
-            yarn add netlify-cli  && yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN
+            yarn add netlify-cli  && yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
 workflows:
   build_test_deploy:
     jobs:
