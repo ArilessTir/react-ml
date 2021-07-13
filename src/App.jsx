@@ -55,7 +55,7 @@ const App = () => {
           }}
         />
         <Button onClick={handleSubmit} variant="contained" color="primary">
-          Submit
+          Valider
         </Button>
       </form>
       <h1 hidden={apiAnswer === ""}>
