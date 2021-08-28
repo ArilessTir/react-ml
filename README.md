@@ -2,6 +2,3 @@
 
 This project contains a form to ask a ML api which contains a titanic prediction model
 
-## Netlify url
-
-#### https://react-ml.netlify.app
